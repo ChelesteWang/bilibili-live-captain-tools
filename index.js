@@ -1,51 +1,41 @@
 const axios = require('axios')
 const roomid = "146088"
 const ruid = "642922"
+const url = `https://api.live.bilibili.com/xlive/app-room/v2/guardTab/topList?roomid=${roomid}&ruid=${ruid}&page_size=30`
+
 const Captin = {
     1: '总督',
     2: '提督',
     3: '舰长'
 }
 
+const reqPromise = url => axios.get(url);
+
 let CaptinList = []
 let UserList = []
 
 async function crawler(URL, pageNow) {
-
+    const res = await reqPromise(URL);
     if (pageNow == 1) {
-        axios.get(URL).then((res) => {
-            CaptinList = CaptinList.concat(res.data.data.top3)
-            return res
-        }).then(getInfo)
+        CaptinList = CaptinList.concat(res.data.data.top3);
     }
-    axios.get(URL).then(getCaptin).then(getUser).catch((err) => {
-        console.error(err);
-    })
-
-    return CaptinList
+    CaptinList = CaptinList.concat(res.data.data.list);
 }
 
-function getCaptin(res) {
 
-    CaptinList = CaptinList.concat(res.data.data.list)
-    return CaptinList
-}
-
-function getInfo(res) {
+function getMaxPage(res) {
 
     const Info = res.data.data.info
-    const { num: captinNum, page: maxPage } = Info
-    console.log(captinNum, maxPage)
-    return res
+    const { page: maxPage } = Info
+    return maxPage
 }
 
 
-function getUser(res) {
+function getUserList(res) {
 
     for (let item of res) {
         const userInfo = item
         const { uid, username, guard_level } = userInfo
-        // console.log(uid, username, Captin[guard_level])
         UserList.push({ uid, username, Captin: Captin[guard_level] })
     }
     console.log(res.length)
@@ -53,11 +43,23 @@ function getUser(res) {
 }
 
 async function main() {
-
-    for (let pageNow = 1; pageNow < 26; pageNow++) {
-        const URL = `https://api.live.bilibili.com/xlive/app-room/v2/guardTab/topList?roomid=${roomid}&page=${pageNow}&ruid=${ruid}&page_size=30`
-        let a = await crawler(URL, pageNow)
+    const maxPage = await reqPromise(`${url}&page=1`).then(getMaxPage)
+    for (let pageNow = 1; pageNow < maxPage+1; pageNow++) {
+        const URL = `${url}&page=${pageNow}`;
+        await crawler(URL, pageNow);
     }
+    getUserList(CaptinList)
 }
 
 main()
+
+function search(ruid, UserList) {
+    for (let i = 0; i < UserList.length; i++) {
+        if (UserList[i].ruid === ruid) {
+            return UserList[i];
+        }
+    }
+    return 0
+}
+
+search()
