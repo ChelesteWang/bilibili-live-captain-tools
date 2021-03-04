@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/yuqing521/bilibili-live-captain-tools#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0"
   }
 }

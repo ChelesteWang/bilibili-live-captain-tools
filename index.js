@@ -38,28 +38,30 @@ function getUserList(res) {
         const { uid, username, guard_level } = userInfo
         UserList.push({ uid, username, Captin: Captin[guard_level] })
     }
-    console.log(res.length)
-    console.log(UserList)
+    // console.log(res.length)
+    // console.log(UserList)
 }
 
-async function main() {
+async function main(UID) {
     const maxPage = await reqPromise(`${url}&page=1`).then(getMaxPage)
-    for (let pageNow = 1; pageNow < maxPage+1; pageNow++) {
+    for (let pageNow = 1; pageNow < maxPage + 1; pageNow++) {
         const URL = `${url}&page=${pageNow}`;
         await crawler(URL, pageNow);
     }
     getUserList(CaptinList)
+    console.log(search(UID, UserList))
+    return search(UID, UserList)
 }
 
-main()
-
-function search(ruid, UserList) {
+function search(uid, UserList) {
     for (let i = 0; i < UserList.length; i++) {
-        if (UserList[i].ruid === ruid) {
+        if (UserList[i].uid === uid) {
             return UserList[i];
         }
     }
     return 0
 }
 
-search()
+module.exports = {
+    main
+}
