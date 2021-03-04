@@ -1,0 +1,26 @@
+{
+  "name": "bilibili-live-captain-tools",
+  "version": "1.0.0",
+  "description": "bilibili-live-captain-tools , bilibili 舰长工具包",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuqing521/bilibili-live-captain-tools.git"
+  },
+  "keywords": [
+    "bilibili",
+    "bilibili-live"
+  ],
+  "author": "yuqing521",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuqing521/bilibili-live-captain-tools/issues"
+  },
+  "homepage": "https://github.com/yuqing521/bilibili-live-captain-tools#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
