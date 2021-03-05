@@ -22,7 +22,9 @@
   "homepage": "https://github.com/yuqing521/bilibili-live-captain-tools#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "ejs": "^3.1.6",
     "koa": "^2.13.1",
-    "koa-router": "^10.0.0"
+    "koa-router": "^10.0.0",
+    "koa-views": "^7.0.0"
   }
 }

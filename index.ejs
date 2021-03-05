@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>舰长查询</title>
+</head>
+<body>
+    
+    <%if(Info!==0){%>
+    <div><h1>舰长信息</h1>
+    <p>用户名： <%= Info.username %></p>
+    <p>UID： <%= Info.uid %></p>
+    <p>舰长等级： <%= Info.Captin %></p></div>
+    <%}else{%>
+        <p>未找到该舰长信息</p>
+    <%}%>
+
+</body>
+</html>
