@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .search_form{
+        width:602px;
+        height:42px;
+    }
+ 
+    /*左边输入框设置样式*/
+    .input_text{
+        width:400px;
+        height: 40px;
+        border:1px solid green;
+        /*清除掉默认的padding*/
+        padding:0px;
+        border-radius: .625rem 0 0 .625rem;
+        /*提示字首行缩进*/
+        text-indent: 10px;
+ 
+        /*去掉蓝色高亮框*/
+        outline: none;
+ 
+        /*用浮动解决内联元素错位及小间距的问题*/
+        float:left;
+    }
+ 
+    .input_sub{
+        width:100px;
+        height: 42px;
+        background: #00a1d6 ;
+        border-radius:  0 .625rem .625rem 0;
+        /*去掉submit按钮默认边框*/
+        border:0px;
+        /*改成右浮动也是可以的*/
+        float:left;
+        color:white;/*搜索的字体颜色为白色*/
+        cursor:pointer;/*鼠标变为小手*/
+    }
+    </style>
+</head>
+<body>
+    <h1>韩小沐的大航海时代</h1>
+    <form class="search_form" method="get" action="http://47.94.228.26:3000/api/captin/?">
+    <input type="text" name="uid" id="uid" class="input_text" placeholder="请输入舰长UID"><!-- -->
+    <input type="submit" value="搜索" class="input_sub">
+    </form>
+</body>
+</html>
